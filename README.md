@@ -3,6 +3,10 @@ MayaToolBox
 
 A ToolSet for Autodesk Maya, covering multiple Fixes, Boxes, Helpers and Stuff.
 
+Preview :
+![Preview](http://i.imgur.com/aWpNkUn.png?1)
+
+
 Install on OS X :
 
 - Download the Repository and put all mel files in /Users/Shared/Autodesk/maya/scripts/

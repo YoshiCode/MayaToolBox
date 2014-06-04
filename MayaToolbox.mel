@@ -55,6 +55,7 @@ formLayout -edit
 // CleanUp
   string $cleanTab = `rowColumnLayout -numberOfColumns 2`;
       button -width 220 -label "Delete Hidden Objects in Selected" -command "deleteHidden";
+      button -width 220 -label "Remove Pasted Prefix in Outliner" -command "removePastedPrefix";
       setParent..;
 
 // UI
@@ -64,6 +65,7 @@ formLayout -edit
 // Mesh
   string $meshTab = `rowColumnLayout -numberOfColumns 2`;
   button -width 220 -label "Merge Group into Poly" -command "mergeGrp";
+  button -width 220 -label "Split Mesh along Edge" -command "splitAlongEdge";
   setParent..;
 
 

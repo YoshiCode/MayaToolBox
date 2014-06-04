@@ -29,7 +29,7 @@ formLayout -edit
 // Basics
   string $baseTab = `rowColumnLayout -numberOfColumns 2`;
     button -width 220 -label "Create Base Rig" -command "createBaseRig";
-    button -width 220 -label "Create Image Planes" -command "FBImgpln";
+    button -width 220 -label "Create Image Planes" -command "createImgPlanes";
       button -width 220 -label "Load MentalRay" -command "loadMentalRay";
     setParent..;
 

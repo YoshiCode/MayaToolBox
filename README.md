@@ -10,7 +10,7 @@ Install on OS X :
 - Call "MayaToolBox" in MEL or create a Shelf Button
 
 Install on Windows :
-- Download the Repository and put all mel files in MyDocuments/maya/<your version>/scripts
+- Download the Repository and put all mel files in MyDocuments/maya/\your version\/scripts
 - Close all Maya Inszances and Start it again.
 - Call "MayaToolBox" in MEL or create a Shelf Button
 

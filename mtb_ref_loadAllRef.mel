@@ -1,5 +1,5 @@
 // Load all References
-global proc loadAllRef()
+global proc mtb_ref_loadAllRef()
 {
   string $references[] = `file -q -r`;
   string $query;

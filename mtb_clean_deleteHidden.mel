@@ -1,5 +1,5 @@
 // Delete Hidden Objects under selected
-global proc deleteHidden(){
+global proc mtb_clean_deleteHidden(){
 	string $sel[] = `ls -sl`;
 	string $all[] = `listRelatives -allDescendents -path $sel`;
 	for ($node in $all){

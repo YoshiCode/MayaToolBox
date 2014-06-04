@@ -1,5 +1,5 @@
 // Unload Reference by Selection
-global proc unloadSelectedRef()
+global proc mtb_ref_unloadSelectedRef()
 {
   string  $selected[] = `ls -sl`;
   string	$downUnder[] = `ls -dag -ap -sl`;

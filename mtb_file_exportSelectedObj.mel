@@ -1,4 +1,4 @@
-global proc exportSelectedObj(){
+global proc mtb_file_exportSelectedObj(){
 	$sel = `ls -sl`;
 	$currentFilePath = dirname(`file -q -sceneName`);
 	$objfolder = $currentFilePath + "/obj_export";

@@ -1,7 +1,7 @@
 // Split an Object into two meshes alonge an edge Loop, 
 // but currently one half gets destroyed..
 
-global proc splitAlongEdge(){
+global proc mtb_mesh_splitAlongEdge(){
   string $objnames[] = `ls -hl`;
   polyPerformAction polyMapCut e 0;
   string $vname = $objnames[0]+".vtx[0]";

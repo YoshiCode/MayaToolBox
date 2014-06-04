@@ -1,5 +1,5 @@
 // Highlight Selected References in Reference Editor
-global proc revealReference() {
+global proc mtb_ref_revealReference() {
   string $sel[] = `ls -sl`;
   if ( !`size $sel` ) {
     print "// Nothing is selected. //\n";

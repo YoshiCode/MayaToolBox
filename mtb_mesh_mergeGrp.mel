@@ -1,7 +1,7 @@
 // Merges a Group with Polygon-Objects in it 
 // into one Polygon Object with the Group as the Name of the Object
 
-global proc mergeGrp(){
+global proc mtb_mesh_mergeGrp(){
 	$obj =`ls -sl -tr`;
 	if ( !`size $obj` ) {
     	print "// Nothing is selected. //\n";

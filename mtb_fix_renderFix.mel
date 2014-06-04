@@ -1,5 +1,5 @@
 // Fixes Render View in Maya (2012)
-global proc renderFix(){
+global proc mtb_fix_renderFix(){
 $exists=0;
  for ($item in `getPanel -scriptType "renderWindowPanel"`) {
    if ( $item == "renderView" ) {

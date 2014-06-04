@@ -2,7 +2,7 @@
 // so you can assign it to a Keyboard-Shortcut
 // or a Shelf-Button.
 
-global proc toggleXray(){
+global proc mtb_ui_toggleXray(){
 $currentPanel = `getPanel -withFocus`;
 
 if ( (`getPanel -typeOf $currentPanel`) == "modelPanel" )

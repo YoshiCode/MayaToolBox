@@ -1,5 +1,5 @@
 // Load Mental Ray and set as default (Somehow buggy in 2013/2014)
-global proc loadMentalRay(){
+global proc mtb_basic_loadMentalRay(){
 	int $loaded = `pluginInfo -query -loaded "Mayatomr"`;
 	if ( $loaded = 0 ){
 		// Load MR

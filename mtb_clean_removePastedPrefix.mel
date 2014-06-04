@@ -1,4 +1,4 @@
-global proc removePastedPrefix(){
+global proc mtb_clean_removePastedPrefix(){
 	string $pasted[] = `ls "pasted__*"`;
 	string $object;
 	for ( $object in $pasted ){

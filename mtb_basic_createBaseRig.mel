@@ -1,4 +1,4 @@
-global proc createBaseRig(){
+global proc mtb_basic_createBaseRig(){
 	if( `objExists Master_Grp` ) {
     	print("Warning: The Node already exists and you probably have a rig already");
 	} else {

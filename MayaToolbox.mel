@@ -6,14 +6,14 @@ window -menuBar true -width 220 -title "Maya Toolbox" MayaToolBox;
 
 menuBarLayout;
   menu -label "Help" -helpMenu true;
-  menuItem -label "About.." -command "helpAbout";
-  menuItem -label "Basics" -command "helpBasics";
-  menuItem -label "References" -command "helpRef";
-  menuItem -label "Fixes" -command "helpFix";
-  menuItem -label "Files" -command "helpFiles";
-  menuItem -label "CleanUp" -command "helpClean";
-  menuItem -label "UI" -command "helpUI";
-  menuItem -label "Mesh" -command "helpMesh";
+  menuItem -label "About.." -command "mtb_help_helpAbout";
+  menuItem -label "Basics" -command "mtb_help_helpBasics";
+  menuItem -label "References" -command "mtb_help_helpRef";
+  menuItem -label "Fixes" -command "mtb_help_helpFix";
+  menuItem -label "Files" -command "mtb_help_helpFiles";
+  menuItem -label "CleanUp" -command "mtb_help_helpClean";
+  menuItem -label "UI" -command "mtb_help_helpUI";
+  menuItem -label "Mesh" -command "mtb_help_helpMesh";
 
 
 string $form = `formLayout`;
@@ -28,44 +28,44 @@ formLayout -edit
 // Tabs :
 // Basics
   string $baseTab = `rowColumnLayout -numberOfColumns 2`;
-    button -width 220 -label "Create Base Rig" -command "createBaseRig";
-    button -width 220 -label "Create Image Planes" -command "createImgPlanes";
-      button -width 220 -label "Load MentalRay" -command "loadMentalRay";
+    button -width 220 -label "Create Base Rig" -command "mtb_basic_createBaseRig";
+    button -width 220 -label "Create Image Planes" -command "mtb_basic_createImgPlanes";
+      button -width 220 -label "Load MentalRay" -command "mtb_basic_loadMentalRay";
     setParent..;
 
 //References		
   string $refTab = `rowColumnLayout -numberOfColumns 2 -columnWidth 1 220 -columnWidth 2 220`;
-    button -width 220 -align "left" -label "Open Reference Editor" -command "openRefEditor";
-    button -width 220 -align "left" -label "Highlight Selected in Reference Editor" -command "RevealReference";
-    button -width 220 -align "left" -label "Load all References" -command "loadAllRef";
-      button -width 220 -align "left" -label "Unload Reference by Selection" -command "unloadSelectedRef";
-       button -width 440 -align "left" -label "Fix Lost Shader Connections on all References" -command "fixShaderAttr";
+    button -width 220 -align "left" -label "Open Reference Editor" -command "mtb_ref_openRefEditor";
+    button -width 220 -align "left" -label "Highlight Selected in Reference Editor" -command "mtb_ref_revealReference";
+    button -width 220 -align "left" -label "Load all References" -command "mtb_ref_loadAllRef";
+      button -width 220 -align "left" -label "Unload Reference by Selection" -command "mtb_ref_unloadSelectedRef";
+       button -width 440 -align "left" -label "Fix Lost Shader Connections on all References" -command "mtb_ref_fixShaderAttr";
       setParent..;
       
 // Fixes
   string $fixTab = `rowColumnLayout -numberOfColumns 2`;
-      button -width 220 -label "Get Mental Ray Window back" -command "renderFix";
+      button -width 220 -label "Get Mental Ray Window back" -command "mtb_fix_renderFix";
       setParent..;
 
 // Files
   string $fileTab = `rowColumnLayout -numberOfColumns 1 -columnWidth 1 440`;
-      button -width 440 -label "Export Selected Object as .obj in Scene Folder" -command "exportSelectedObj";
+      button -width 440 -label "Export Selected Object as .obj in Scene Folder" -command "mtb_file_exportSelectedObj";
       setParent..;
 
 // CleanUp
   string $cleanTab = `rowColumnLayout -numberOfColumns 2`;
-      button -width 220 -label "Delete Hidden Objects in Selected" -command "deleteHidden";
-      button -width 220 -label "Remove Pasted Prefix in Outliner" -command "removePastedPrefix";
+      button -width 220 -label "Delete Hidden Objects in Selected" -command "mtb_clean_deleteHidden";
+      button -width 220 -label "Remove Pasted Prefix in Outliner" -command "mtb_clean_removePastedPrefix";
       setParent..;
 
 // UI
   string $UITab = `rowColumnLayout -numberOfColumns 2`;
-      button -width 220 -label "Toggle XRay" -command "toggleXray";
+      button -width 220 -label "Toggle XRay" -command "mtb_ui_toggleXray";
       setParent..;
 // Mesh
   string $meshTab = `rowColumnLayout -numberOfColumns 2`;
-  button -width 220 -label "Merge Group into Poly" -command "mergeGrp";
-  button -width 220 -label "Split Mesh along Edge" -command "splitAlongEdge";
+  button -width 220 -label "Merge Group into Poly" -command "mtb_mesh_mergeGrp";
+  button -width 220 -label "Split Mesh along Edge" -command "mtb_mesh_splitAlongEdge";
   setParent..;
 
 

@@ -1,0 +1,9 @@
+global proc mtb_help_helpBasics(){
+	if ( (`window -exists helpAbout `) == true ) deleteUI  helpAbout;
+	window -menuBar true -width 300 -height 250 -title "MayaToolBox-Help: Basics" helpBasics;
+  		columnLayout;
+    text -align "left" -label "Base Rig:";
+    text -align "left" -label " The Base rig should be in every Asset that is created.\n It creates a very Basic structure, \n that Helps organizing the Scene.";
+
+	showWindow helpBasics;
+}

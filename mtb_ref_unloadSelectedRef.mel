@@ -1,0 +1,20 @@
+// Unload Reference by Selection
+global proc unloadSelectedRef()
+{
+  string  $selected[] = `ls -sl`;
+  string	$downUnder[] = `ls -dag -ap -sl`;
+  string  $ref;
+  print($selected);
+  print($downUnder);
+    for ( $ref in $downUnder ) {
+      if(`objExists $ref`) {
+        $query = `referenceQuery -isNodeReferenced $ref`;
+          if ( $query != 0){
+            $referenceNode = `referenceQuery -rfn $ref`;
+            $referenceFile = `reference -rfn $referenceNode -q -filename`;
+            file -unloadReference -referenceNode $referenceFile;
+          }
+      }
+    }
+  print("All selected references have been unloaded");      
+}

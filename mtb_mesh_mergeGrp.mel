@@ -1,0 +1,13 @@
+// Merges a Group with Polygon-Objects in it 
+// into one Polygon Object with the Group as the Name of the Object
+
+global proc mergeGrp(){
+	$obj =`ls -sl -tr`;
+	if ( !`size $obj` ) {
+    	print "// Nothing is selected. //\n";
+    	return;
+  	}
+	$name = $obj[0];
+	polyUnite -ch 0 -mergeUVSets 1 -n $name;
+	xform -cp;
+}

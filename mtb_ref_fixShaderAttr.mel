@@ -1,0 +1,17 @@
+// Fix Lost Shader Connections on all References
+global proc fixShaderAttr()
+{
+  string $refs[] = `file -q -r`;
+  for ( $ref in $refs ){
+    print($ref + "\n");
+    $subref = `file -q -r $ref`;
+    print ($subref);
+    for ($r in $subref){
+      file -unloadReference -referenceNode $r;
+      referenceEdit -failedEdits true -successfulEdits true -editCommand connectAttr -removeEdits $r;
+      referenceEdit -failedEdits true -successfulEdits true -editCommand disconnectAttr -removeEdits $r;
+      file -loadReference -referenceNode $r;
+    }
+  }
+  print("All Connection-Attributes deleted \n");
+}

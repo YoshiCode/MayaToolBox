@@ -1,0 +1,16 @@
+// Delete Hidden Objects under selected
+global proc deleteHidden(){
+	string $sel[] = `ls -sl`;
+	string $all[] = `listRelatives -allDescendents -path $sel`;
+	for ($node in $all){
+    	if( `objExists $node` ) {
+      		int $visible = `getAttr ( $node + ".visibility" )`;
+      	if ( $visible == 0 ){
+        	if( `objExists $node` ) {
+          		print ("Delete : "+ $node + "\n" );
+            	delete $node;
+        	}
+      	}
+  		}
+ 	}
+}

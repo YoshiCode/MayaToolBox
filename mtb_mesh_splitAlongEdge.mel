@@ -1,0 +1,12 @@
+// Split an Object into two meshes alonge an edge Loop, 
+// but currently one half gets destroyed..
+
+global proc splitAlongEdge(){
+  string $objnames[] = `ls -hl`;
+  polyPerformAction polyMapCut e 0;
+  string $vname = $objnames[0]+".vtx[0]";
+  select $vname;
+  polySelectBorderShell 0;
+  textureWindowSelectConvert 1;
+  ExtractFace;
+}

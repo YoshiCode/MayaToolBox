@@ -1,0 +1,16 @@
+// Load Mental Ray and set as default (Somehow buggy in 2013/2014)
+global proc loadMentalRay(){
+	int $loaded = `pluginInfo -query -loaded "Mayatomr"`;
+	if ( $loaded = 0 ){
+		// Load MR
+  		loadPlugin Mayatomr;
+		// Set AutoLoad
+  		pluginInfo -edit -autoload true Mayatomr;
+		//sets Renderer to MentalRay
+  		setAttr -type "string" defaultRenderGlobals.currentRenderer "mentalRay";
+  	}
+	else{
+  		setAttr -type "string" defaultRenderGlobals.currentRenderer "mentalRay";
+  		print("Mental Ray is already loaded \n");
+  	}
+}

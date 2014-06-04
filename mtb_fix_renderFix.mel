@@ -1,0 +1,20 @@
+// Fixes Render View in Maya (2012)
+global proc renderFix(){
+$exists=0;
+ for ($item in `getPanel -scriptType "renderWindowPanel"`) {
+   if ( $item == "renderView" ) {
+     print "renderView exists.\n";
+     $exists=1;
+   }
+ }
+ if ( $exists == 0 ) {
+   for ($item in `getPanel -scriptType "renderWindowPanel"`) {
+     //print ( $item + "\n");
+     if ( $item == "renderWindowPanel1" ) {
+     deleteUI renderWindowPanel1;
+     $renderPanel = `scriptedPanel -type "renderWindowPanel" -unParent renderView`;
+     scriptedPanel -e -label `interToUI $renderPanel` $renderPanel;
+     }
+   }
+ }
+}

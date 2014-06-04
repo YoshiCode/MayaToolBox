@@ -1,0 +1,10 @@
+// Toggle X-Ray via Script,
+// so you can assign it to a Keyboard-Shortcut
+// or a Shelf-Button.
+
+global proc toggleXray(){
+$currentPanel = `getPanel -withFocus`;
+
+if ( (`getPanel -typeOf $currentPanel`) == "modelPanel" )
+  modelEditor -e -xray ( !`modelEditor -q -xray $currentPanel` ) $currentPanel;
+}

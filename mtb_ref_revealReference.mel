@@ -1,0 +1,25 @@
+// Highlight Selected References in Reference Editor
+global proc revealReference() {
+  string $sel[] = `ls -sl`;
+  if ( !`size $sel` ) {
+    print "// Nothing is selected. //\n";
+    return;
+  }
+
+  string $obj = $sel[ `size $sel` - 1 ];
+  if ( !`referenceQuery -inr $obj` ) {
+    print ( "// '" + $obj + "' is not a referenced node. //\n" );
+    return;
+  }
+
+  string $ref = `referenceQuery -f $obj`;
+  string $refs[] = `file -q -r`;
+  for ( $i = 0; $i < `size $refs`; $i++ ) {
+    if ( $refs[ $i ] == $ref ) {
+      ReferenceEditor;
+      global string $gReferenceEditorPanel;
+      sceneEditor -e -si $i $gReferenceEditorPanel;
+      return;
+    }
+  }
+}

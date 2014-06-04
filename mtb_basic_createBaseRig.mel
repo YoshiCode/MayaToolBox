@@ -1,0 +1,65 @@
+global proc createBaseRig(){
+	if( `objExists Master_Grp` ) {
+    	print("Warning: The Node already exists and you probably have a rig already");
+	} else {
+		CreateEmptyGroup;
+		rename "null1" "Master_Grp";
+		CreateEmptyGroup;
+		rename "null1" "Geo_Grp";
+		CreateEmptyGroup;
+		rename "null1" "Master_Ctrl";
+		CreateEmptyGroup;
+		rename "null1" "Extras_Grp";
+		CreateEmptyGroup;
+		rename "null1" "AssetA";
+		select -r Geo_Grp Master_Grp ;
+		parent;
+		select -r Master_Ctrl Master_Grp ;
+		parent;
+		select -r Extras_Grp Master_Grp ;
+		parent;
+		select -r AssetA Geo_Grp ;
+		parent;
+		setToolTo "CreateNurbsCircleCtx";
+		circle -ch on -o on -nr 0 1 0 ;
+		rename "nurbsCircle1" "Global_Ctrl";
+		select -r Global_Ctrl Master_Ctrl;
+		parent;
+		SelectTool;
+		setAttr -lock true -keyable false -channelBox false "Master_Grp.tx";
+		setAttr -lock true -keyable false -channelBox false "Master_Grp.ty";
+		setAttr -lock true -keyable false -channelBox false "Master_Grp.tz";
+		setAttr -lock true -keyable false -channelBox false "Master_Grp.rx";
+		setAttr -lock true -keyable false -channelBox false "Master_Grp.ry";
+		setAttr -lock true -keyable false -channelBox false "Master_Grp.rz";
+		setAttr -lock true -keyable false -channelBox false "Master_Grp.sx";
+		setAttr -lock true -keyable false -channelBox false "Master_Grp.sy";
+		setAttr -lock true -keyable false -channelBox false "Master_Grp.sz";
+		setAttr -lock true -keyable false -channelBox false "Master_Grp.v";
+		select -r Global_Ctrl ;
+		select -add Geo_Grp ;
+		doCreateParentConstraintArgList 1 { "1","0","0","0","0","0","0","1","","1" };
+		parentConstraint -mo -weight 1;
+		rename "Geo_Grp_parentConstraint1" "Global_Ctrl_Pc_01";
+		select -r Global_Ctrl ;
+		addAttr -ln "CtrlSize"  -at double  |Master_Grp|Master_Ctrl|Global_Ctrl;
+		addAttr -ln "GeoScale"  -at double  -dv 1 |Master_Grp|Master_Ctrl|Global_Ctrl;
+		setAttr -e-keyable true |Master_Grp|Master_Ctrl|Global_Ctrl.GeoScale;
+		setAttr -e-channelBox true |Master_Grp|Master_Ctrl|Global_Ctrl.CtrlSize;
+		setAttr -keyable false -channelBox false "Global_Ctrl.sx";
+		setAttr -keyable false -channelBox false "Global_Ctrl.sy";
+		setAttr -keyable false -channelBox false "Global_Ctrl.sz";
+		connectAttr -f Global_Ctrl.GeoScale Geo_Grp.scaleX;
+		connectAttr -f Global_Ctrl.GeoScale Geo_Grp.scaleY;
+		connectAttr -f Global_Ctrl.GeoScale Geo_Grp.scaleZ;
+		connectAttr -f Global_Ctrl.CtrlSize Global_Ctrl.scaleX;
+		connectAttr -f Global_Ctrl.CtrlSize Global_Ctrl.scaleY;
+		connectAttr -f Global_Ctrl.CtrlSize Global_Ctrl.scaleZ;
+		setAttr -lock false "Master_Grp.v";
+		setAttr -k on |Master_Grp.visibility;
+		connectAttr -f Global_Ctrl.visibility Master_Grp.visibility;
+		setAttr "Global_Ctrl.CtrlSize" 1;
+		setAttr "Global_Ctrl.overrideEnabled" 1;
+		setAttr "Global_Ctrl.overrideColor" 13;
+		}
+	}

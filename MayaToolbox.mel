@@ -4,641 +4,78 @@ if ( (`window -exists MayaToolBox `) == true ) deleteUI  MayaToolBox;
 
 window -menuBar true -width 220 -title "Maya Toolbox" MayaToolBox;
 
-
 menuBarLayout;
-	menu -label "Help" -helpMenu true;
-	menuItem -label "About.." -command "helpAbout";
-	menuItem -label "Basics" -command "helpBasics";
-	menuItem -label "References" -command "helpRef";
-	menuItem -label "Fixes" -command "helpFix";
-	menuItem -label "Files" -command "helpFiles";
-	menuItem -label "CleanUp" -command "helpClean";
-	menuItem -label "UI" -command "helpUI";
-	menuItem -label "Mesh" -command "helpMesh";
+  menu -label "Help" -helpMenu true;
+  menuItem -label "About.." -command "helpAbout";
+  menuItem -label "Basics" -command "helpBasics";
+  menuItem -label "References" -command "helpRef";
+  menuItem -label "Fixes" -command "helpFix";
+  menuItem -label "Files" -command "helpFiles";
+  menuItem -label "CleanUp" -command "helpClean";
+  menuItem -label "UI" -command "helpUI";
+  menuItem -label "Mesh" -command "helpMesh";
 
 
 string $form = `formLayout`;
 string $tabs = `tabLayout -innerMarginWidth 5 -innerMarginHeight 5`;
 formLayout -edit
-	-attachForm $tabs "top"    0
+  -attachForm $tabs "top"    0
     -attachForm $tabs "left"   0
     -attachForm $tabs "bottom" 0
-	-attachForm $tabs "right"  0
+  -attachForm $tabs "right"  0
     $form;
 
 // Tabs :
 // Basics
-	string $baseTab = `rowColumnLayout -numberOfColumns 2`;
-		button -width 220 -label "Create Base Rig" -command "createBaseRig";
-		button -width 220 -label "Create Image Planes" -command "FBImgpln";
-    	button -width 220 -label "Load MentalRay" -command "loadMentalRay";
-		setParent..;
+  string $baseTab = `rowColumnLayout -numberOfColumns 2`;
+    button -width 220 -label "Create Base Rig" -command "createBaseRig";
+    button -width 220 -label "Create Image Planes" -command "FBImgpln";
+      button -width 220 -label "Load MentalRay" -command "loadMentalRay";
+    setParent..;
 
 //References		
-	string $refTab = `rowColumnLayout -numberOfColumns 2 -columnWidth 1 220 -columnWidth 2 220`;
-		button -width 220 -align "left" -label "Open Reference Editor" -command "openRefEditor";
-		button -width 220 -align "left" -label "Highlight Selected in Reference Editor" -command "RevealReference";
-		button -width 220 -align "left" -label "Load all References" -command "loadAllRef";
-    	button -width 220 -align "left" -label "Unload Reference by Selection" -command "unloadSelectedRef";
-   		button -width 440 -align "left" -label "Fix Lost Shader Connections on all References" -command "fixShaderAttr";
-    	setParent..;
-    	
+  string $refTab = `rowColumnLayout -numberOfColumns 2 -columnWidth 1 220 -columnWidth 2 220`;
+    button -width 220 -align "left" -label "Open Reference Editor" -command "openRefEditor";
+    button -width 220 -align "left" -label "Highlight Selected in Reference Editor" -command "RevealReference";
+    button -width 220 -align "left" -label "Load all References" -command "loadAllRef";
+      button -width 220 -align "left" -label "Unload Reference by Selection" -command "unloadSelectedRef";
+       button -width 440 -align "left" -label "Fix Lost Shader Connections on all References" -command "fixShaderAttr";
+      setParent..;
+      
 // Fixes
-	string $fixTab = `rowColumnLayout -numberOfColumns 2`;
-    	button -width 220 -label "Get Mental Ray Window back" -command "renderFix";
-    	setParent..;
+  string $fixTab = `rowColumnLayout -numberOfColumns 2`;
+      button -width 220 -label "Get Mental Ray Window back" -command "renderFix";
+      setParent..;
 
 // Files
-	string $fileTab = `rowColumnLayout -numberOfColumns 1 -columnWidth 1 440`;
-    	button -width 440 -label "Export Selected Object as .obj in Scene Folder" -command "exportSelectedObj";
-    	setParent..;
+  string $fileTab = `rowColumnLayout -numberOfColumns 1 -columnWidth 1 440`;
+      button -width 440 -label "Export Selected Object as .obj in Scene Folder" -command "exportSelectedObj";
+      setParent..;
 
 // CleanUp
-	string $cleanTab = `rowColumnLayout -numberOfColumns 2`;
-    	button -width 220 -label "Delete Hidden Objects in Selected" -command "deleteHidden";
-    	setParent..;
+  string $cleanTab = `rowColumnLayout -numberOfColumns 2`;
+      button -width 220 -label "Delete Hidden Objects in Selected" -command "deleteHidden";
+      setParent..;
 
 // UI
-	string $UITab = `rowColumnLayout -numberOfColumns 2`;
-    	button -width 220 -label "Toggle XRay" -command "toggleXray";
-    	setParent..;
+  string $UITab = `rowColumnLayout -numberOfColumns 2`;
+      button -width 220 -label "Toggle XRay" -command "toggleXray";
+      setParent..;
 // Mesh
-	string $meshTab = `rowColumnLayout -numberOfColumns 2`;
-	button -width 220 -label "Merge Group into Poly" -command "mergeGrp";
-	setParent..;
+  string $meshTab = `rowColumnLayout -numberOfColumns 2`;
+  button -width 220 -label "Merge Group into Poly" -command "mergeGrp";
+  setParent..;
 
 
      tabLayout -edit
-		-tabLabel $baseTab "Basics"
-		-tabLabel $refTab "References"
-		-tabLabel $meshTab "MeshEdit"
-		-tabLabel $fileTab "Files"
-		-tabLabel $cleanTab "CleanUp"
-		-tabLabel $fixTab "Fixes"
-		-tabLabel $UITab "UI"
+    -tabLabel $baseTab "Basics"
+    -tabLabel $refTab "References"
+    -tabLabel $meshTab "MeshEdit"
+    -tabLabel $fileTab "Files"
+    -tabLabel $cleanTab "CleanUp"
+    -tabLabel $fixTab "Fixes"
+    -tabLabel $UITab "UI"
         $tabs;
 
 showWindow MayaToolBox;
-}
-
-
-global proc helpAbout(){
-if ( (`window -exists helpAbout `) == true ) deleteUI  helpAbout;
-
-window -menuBar true -width 300 -height 250 -title "MayaToolBox-Help: About" helpAbout;
-	columnLayout;
-		text -label "This is the Help Menu.. Welcome ! :)\n The Application was created by Me, Robin Wenzel.\n I hope you like the ToolBox.";
-
-showWindow helpAbout;
-}
-
-global proc helpBasics(){
-if ( (`window -exists helpAbout `) == true ) deleteUI  helpAbout;
-
-window -menuBar true -width 300 -height 250 -title "MayaToolBox-Help: Basics" helpBasics;
-	columnLayout;
-		text -align "left" -label "Base Rig:";
-		text -align "left" -label " The Base rig should be in every Asset that is created.\n It creates a very Basic structure, \n that Helps organizing the Scene.";
-
-showWindow helpBasics;
-}
-
-
-//----------------------------\\
-// Basic Rig Setup
-
-global proc createBaseRig(){
-if( `objExists Master_Grp` ) {
-    print("Warning: The Node already exists and you probably have a rig already");
-} else {
-CreateEmptyGroup;
-rename "null1" "Master_Grp";
-CreateEmptyGroup;
-rename "null1" "Geo_Grp";
-CreateEmptyGroup;
-rename "null1" "Master_Ctrl";
-CreateEmptyGroup;
-rename "null1" "Extras_Grp";
-CreateEmptyGroup;
-rename "null1" "AssetA";
-select -r Geo_Grp Master_Grp ;
-parent;
-select -r Master_Ctrl Master_Grp ;
-parent;
-select -r Extras_Grp Master_Grp ;
-parent;
-select -r AssetA Geo_Grp ;
-parent;
-setToolTo "CreateNurbsCircleCtx";
-circle -ch on -o on -nr 0 1 0 ;
-rename "nurbsCircle1" "Global_Ctrl";
-select -r Global_Ctrl Master_Ctrl;
-parent;
-SelectTool;
-setAttr -lock true -keyable false -channelBox false "Master_Grp.tx";
-setAttr -lock true -keyable false -channelBox false "Master_Grp.ty";
-setAttr -lock true -keyable false -channelBox false "Master_Grp.tz";
-setAttr -lock true -keyable false -channelBox false "Master_Grp.rx";
-setAttr -lock true -keyable false -channelBox false "Master_Grp.ry";
-setAttr -lock true -keyable false -channelBox false "Master_Grp.rz";
-setAttr -lock true -keyable false -channelBox false "Master_Grp.sx";
-setAttr -lock true -keyable false -channelBox false "Master_Grp.sy";
-setAttr -lock true -keyable false -channelBox false "Master_Grp.sz";
-setAttr -lock true -keyable false -channelBox false "Master_Grp.v";
-select -r Global_Ctrl ;
-select -add Geo_Grp ;
-doCreateParentConstraintArgList 1 { "1","0","0","0","0","0","0","1","","1" };
-parentConstraint -mo -weight 1;
-rename "Geo_Grp_parentConstraint1" "Global_Ctrl_Pc_01";
-select -r Global_Ctrl ;
-addAttr -ln "CtrlSize"  -at double  |Master_Grp|Master_Ctrl|Global_Ctrl;
-addAttr -ln "GeoScale"  -at double  -dv 1 |Master_Grp|Master_Ctrl|Global_Ctrl;
-setAttr -e-keyable true |Master_Grp|Master_Ctrl|Global_Ctrl.GeoScale;
-setAttr -e-channelBox true |Master_Grp|Master_Ctrl|Global_Ctrl.CtrlSize;
-setAttr -keyable false -channelBox false "Global_Ctrl.sx";
-setAttr -keyable false -channelBox false "Global_Ctrl.sy";
-setAttr -keyable false -channelBox false "Global_Ctrl.sz";
-connectAttr -f Global_Ctrl.GeoScale Geo_Grp.scaleX;
-connectAttr -f Global_Ctrl.GeoScale Geo_Grp.scaleY;
-connectAttr -f Global_Ctrl.GeoScale Geo_Grp.scaleZ;
-connectAttr -f Global_Ctrl.CtrlSize Global_Ctrl.scaleX;
-connectAttr -f Global_Ctrl.CtrlSize Global_Ctrl.scaleY;
-connectAttr -f Global_Ctrl.CtrlSize Global_Ctrl.scaleZ;
-setAttr -lock false "Master_Grp.v";
-setAttr -k on |Master_Grp.visibility;
-connectAttr -f Global_Ctrl.visibility Master_Grp.visibility;
-setAttr "Global_Ctrl.CtrlSize" 1;
-setAttr "Global_Ctrl.overrideEnabled" 1;
-setAttr "Global_Ctrl.overrideColor" 13;
-}
-}
-
-
-
-//----------------------------\\
-// Image Planes
-global proc FBImgpln(){
-if ( (`window -exists FBimgplane `) == true ) deleteUI  FBimgplane;
-window -title "Maya Image Plane Script" -wh 400 280 -menuBar on -mxb false FBimgplane;
-string $monkeys = `formLayout`;
-string $Scroller = `scrollLayout `;
-   columnLayout -rs 4 ;
-	textFieldGrp
-	  	-cat 1 "left" 10
-	  	-cw2 75 205
-		-label "Name "
-		-ann "Name to use as prefix in created nodes"
-		name;
-   separator -style "in" -w 290;
-   rowLayout 
-		-w 400 
-		-nc 2 
-		-cw2 255 30 
-		-cal 1 "left" 
-		ImgRow;
-		
-	   textFieldGrp -l "File " -fi "" -ed 0 -cw2 75 180 -w 255 Imgfield;
-	   symbolButton 
-		-enable true 
-		-image "navButtonBrowse.xpm" 
-		-c "FBimgBrowse"	
-		imagebrowser;
-	setParent..;
-separator -style "none";
-   optionMenuGrp
-	-cat 1 "left" 41
-	-cw2 76 100
-	-label "View"
-	-ann "Direction of Image plane"
-ViewDropdown;
-	menuItem -label "Front";
-	menuItem -label "Back";
-	menuItem -label "Left";
-	menuItem -label "Right";
-	menuItem -label "Top";
-	menuItem -label "Bottom";	
-    floatSliderGrp 
-		-label "Scale" 
-		-field 1
-		-pre 3
-		-cat 3 "left" 9
-		-cw3 75 40 25
-		-minValue 0 
-		-maxValue 1
- 		-fieldMinValue 0 
-		-fieldMaxValue 15
- 		-value .5 
-		scaleSlider;
-
-   floatSliderGrp
-	-label "Offset "
-	-cw3 75 50 155
-	-v 0
-	-min -25
-	-max 25
-	-fmx 100000
-    -pre 3
-	-ann "Offset from Origin"
-	-field true
-	OffsetSlider;
-
-   rowLayout 
-		-w 400 
-		-nc 3 
-		-cw2 100 100 
-		-cal 1 "left" 
-		ChkRow;
-	checkBoxGrp
-		-cat 1 "left" 12
-		-cw2 75 20
-		-numberOfCheckBoxes 1
-   		-label "One sided "
-   		-ann "single sided or double sided"
-	Singleside;
-	
-	checkBoxGrp
-		-cat 1 "left" 12
-		-cw2 75 20
-		-numberOfCheckBoxes 1
-   		-label "Renderable "
-   		-ann "renderable or not"
-	Renderable;
-	checkBoxGrp 
-		-cat 1 "left" 10
-		-cw2 65 20
-		-numberOfCheckBoxes 1
-   		-label "Use alpha "
-   		-ann "use supplied Alpha (if applicable)"
-	useAlpha;
-   setParent..;
-   setParent..;
-setParent..;
-
-button -l "Create" -ann "Create Image plane" -align "center" -w 105 -h 30 -c "FBimgplnMake()" Createbut;
-button -l "Cancel" -ann "Cancel operation" -align "center" -w 105 -h 30 -c "deleteUI FBimgplane " Cancelbut;
-
-formLayout -edit
-	-af $Scroller "top" 0
-	-af $Scroller "bottom" 40
-	-af $Scroller "left" 0
-	-af $Scroller "right" 0
-
-	-attachNone     Createbut     "top"
-	-attachForm     Createbut     "left"   4
-	-attachForm     Createbut     "bottom" 4 
-	-attachPosition  Createbut     "right"   2 50
-	
-	-attachNone     Cancelbut     "top"
-	-attachPosition  Cancelbut     "left"   2 50
-	-attachForm     Cancelbut     "bottom" 4
-	-attachForm     Cancelbut     "right"  4  $monkeys;
-
-showWindow FBimgplane;
-}
-
-
-
-	
-global proc FBimgBrowse()
-{
-   fileBrowserDialog -m 0 -fc "FBimportImage" -ft "image" -an "Import_image" -om "Import";
-}
-
-global proc int FBimportImage( string $filename, string $fileType )
-{
-	textFieldGrp -e -fi ($filename) Imgfield;
-	return 1;
-}
-
-global proc FBimgplnMake()
-{
-	int $imagex;
-	int $imagey;
-	string $name;
-	if (`textFieldGrp	-q -tx name`!="" ) $name = `textFieldGrp -q -tx name`;
-	else $name = "FBimgpln";
-	
-	string $view;
-	{
-		int $viewIndex = `optionMenuGrp -q -sl ViewDropdown`;
-		
-		switch ($viewIndex)
-		{
-			case 1:
-				$view = "_Frnt";
-			break;
-			case 2:
-				$view = "_Back";
-			break;
-			case 3:
-				$view = "_Left";
-			break;
-			case 4:
-				$view = "_Right";
-			break;
-			case 5:
-				$view = "_Top";
-			break;
-			case 6:
-				$view = "_Bot";
-			break;
-		}
-	}
-	string $imagename =`textFieldGrp -q -fi Imgfield`;
-	string $FBshader;
-	string $FBSG; 
-
-//create shader
-if ($imagename!="")
-{
-
-
-string $file = `shadingNode -asTexture file -n ($name+$view+"_file")`;
-string $fileplacement = `shadingNode -asUtility place2dTexture -n ($name+$view+"_place")`;
-
-//connect it up to the file placement node
-	eval(
-	"connectAttr -f " + $fileplacement + ".outUV " + $file+".uvCoord;" +
-	"connectAttr -f " + $fileplacement + ".outUvFilterSize " + $file + ".uvFilterSize;" +
-	"connectAttr -f " + $fileplacement + ".coverage " + $file + ".coverage;" +
-	"connectAttr -f " + $fileplacement + ".translateFrame " + $file + ".translateFrame;" +
-	"connectAttr -f " + $fileplacement + ".rotateFrame " + $file + ".rotateFrame;" +
-	"connectAttr -f " + $fileplacement + ".mirrorU " + $file + ".mirrorU;" +
-	"connectAttr -f " + $fileplacement + ".mirrorV " + $file + ".mirrorV;" +
-	"connectAttr -f " + $fileplacement + ".stagger " + $file + ".stagger;" +
-	"connectAttr -f " + $fileplacement + ".wrapU " + $file + ".wrapU;" +
-	"connectAttr -f " + $fileplacement + ".wrapV " + $file + ".wrapV;" +
-	"connectAttr -f " + $fileplacement + ".repeatUV " + $file + ".repeatUV;" +
-	"connectAttr -f " + $fileplacement + ".vertexUvOne " + $file + ".vertexUvOne;" +
-	"connectAttr -f " + $fileplacement + ".vertexUvTwo " + $file + ".vertexUvTwo;" +
-	"connectAttr -f " + $fileplacement + ".vertexUvThree " + $file + ".vertexUvThree;" +
-	"connectAttr -f " + $fileplacement + ".vertexCameraOne " + $file + ".vertexCameraOne;" +
-	"connectAttr -f " + $fileplacement + ".noiseUV " + $file + ".noiseUV;" +
-	"connectAttr -f " + $fileplacement + ".offset " + $file + ".offset;" +
-	"connectAttr -f " + $fileplacement + ".rotateUV " + $file + ".rotateUV;"
-	);
-
-setAttr ($file + ".ftn") -type "string" $imagename;
-
-$FBshader = `shadingNode -asShader lambert -n ($name+$view)`;
-$FBSG = `sets -renderable true -noSurfaceShader true -empty -n ($name + $view + "SG")`;
-connectAttr -f ($FBshader + ".outColor") ($FBSG + ".surfaceShader");
-connectAttr -force ($file + ".outColor") ($FBshader + ".color");
-
-$imagex = `getAttr ($file+".outSizeX")`;
-$imagey = `getAttr ($file +".outSizeY")`;
-
-if (`getAttr ($file +".fileHasAlpha")` && `checkBoxGrp -query -v1 useAlpha`)
-{
-	//if the image has alpha AND user sets to use alpha, connect it up the alpha
-	connectAttr -force ($file + ".outTransparency") ($FBshader + ".transparency");
-}
-}	
-	else 
-	{
-		warning "No image selected!";
-		$imagex = 1;
-		$imagey = 1;
-	}
-	
-	float $offset = `floatSliderGrp -q -v OffsetSlider`;
-	vector $axis;
-	
-//front
-	if (`optionMenuGrp -query -select ViewDropdown`==1)
-		$axis = <<0, 0, 1>>;
-//back
-	else if (`optionMenuGrp -query -select ViewDropdown`==2)
-	$axis = <<0, 0, -1>>;
-	
-//left
-	else if (`optionMenuGrp -query -select ViewDropdown`==3)
-	$axis = <<-1, 0, 0>>;
-//right
-	else if (`optionMenuGrp -query -select ViewDropdown`==4)
-	$axis = <<1, 0, 0>>;
-	
-//top
-	else if (`optionMenuGrp -query -select ViewDropdown`==5)
-	$axis = <<0, 1, 0>>;
-//bottom
-	else if (`optionMenuGrp -query -select ViewDropdown`==6)
-	$axis = <<0, -1, 0>>;
-		
-polyPlane -w $imagex -h $imagey -sx 1 -sy 1 -ax ($axis.x) ($axis.y) ($axis.z) -tx 1 -ch 1;
-move -a (($axis.x)*-($offset)) (($axis.y)*-($offset)) (($axis.z)*-($offset));
-
-string $currentplane[] = `ls -sl -o -dag`;
-
-setAttr ($currentplane[0]+".scaleX") (`floatSliderGrp -q -v scaleSlider`);
-setAttr ($currentplane[0]+".scaleY") (`floatSliderGrp -q -v scaleSlider`);
-setAttr ($currentplane[0]+".scaleZ") (`floatSliderGrp -q -v scaleSlider`);
-
-rename $currentplane[0] ($name+$view);
-
-$currentplane = `ls -sl -o -dag -s`;
-
-
-
-//oops maybe I should assign the shader I guess, huh? :P
-if ($imagename!="") sets -e -forceElement $FBSG $currentplane[0];
-
-
-if (`checkBoxGrp -query -v1 Singleside`) 
-   setAttr ($currentplane[0] + ".doubleSided") 0;
-else setAttr ($currentplane[0] + ".doubleSided") 1;
-
-if (`checkBoxGrp -query -v1 Renderable`) 
-   {
-	    setAttr ($currentplane[0] + ".primaryVisibility") 1;
-		setAttr ($currentplane[0] + ".visibleInReflections") 1;
-		setAttr ($currentplane[0] + ".visibleInRefractions") 1;
-		setAttr ($currentplane[0] + ".receiveShadows") 1;
-		setAttr ($currentplane[0] + ".castsShadows") 1;
-   }
-else
-   {
-	    setAttr ($currentplane[0] + ".primaryVisibility") 0;
-		setAttr ($currentplane[0] + ".visibleInReflections") 0;
-		setAttr ($currentplane[0] + ".visibleInRefractions") 0;
-		setAttr ($currentplane[0] + ".receiveShadows") 0;
-		setAttr ($currentplane[0] + ".castsShadows") 0;
-   }
-   
-}
-
-
-//----------------------------\\
-// Open Reference Editor
-global proc openRefEditor()
-{
-ReferenceEditor;
-}
-
-//----------------------------\\
-// Load all References
-global proc loadAllRef()
-{
-	string $references[] = `file -q -r`;
-	string $query;
-	for ($r in $references){
-	    print($r + "\n");
-	    $query = `referenceQuery -isLoaded $r`;
-	    if ($query == 0){
-	    	$q = `referenceQuery -rfn $r`;
-			file -loadReference $q;
-		}
-	}
-	print("All references loaded");
-}
-
-//----------------------------\\
-// Unload Reference by Selection
-global proc unloadSelectedRef()
-{
-	string  $selected[] = `ls -sl`;
-	string	$downUnder[] = `ls -dag -ap -sl`;
-	string  $ref;
-	print($selected);
-	print($downUnder);
-		for ( $ref in $downUnder ) {
-			if(`objExists $ref`) {
-				$query = `referenceQuery -isNodeReferenced $ref`;
-					if ( $query != 0){
-						$referenceNode = `referenceQuery -rfn $ref`;
-						$referenceFile = `reference -rfn $referenceNode -q -filename`;
-						file -unloadReference -referenceNode $referenceFile;
-					}
-			}
-		}
-	print("All selected references have been unloaded");      
-}
-
-//----------------------------\\
-// Fix Lost Shader Connections on all References
-global proc fixShaderAttr()
-{
-	string $refs[] = `file -q -r`;
-	for ( $ref in $refs ){
-		print($ref + "\n");
-		$subref = `file -q -r $ref`;
-		print ($subref);
-		for ($r in $subref){
-			file -unloadReference -referenceNode $r;
-			referenceEdit -failedEdits true -successfulEdits true -editCommand connectAttr -removeEdits $r;
-			referenceEdit -failedEdits true -successfulEdits true -editCommand disconnectAttr -removeEdits $r;
-			file -loadReference -referenceNode $r;
-		}
-	}
-	print("All Connection-Attributes deleted \n");
-}
-
-//----------------------------\\
-// Highlight Selected References in Reference Editor
-global proc RevealReference() {
-	string $sel[] = `ls -sl`;
-	if ( !`size $sel` ) {
-		print "// Nothing is selected. //\n";
-		return;
-	}
-
-	string $obj = $sel[ `size $sel` - 1 ];
-	if ( !`referenceQuery -inr $obj` ) {
-		print ( "// '" + $obj + "' is not a referenced node. //\n" );
-		return;
-	}
-
-	string $ref = `referenceQuery -f $obj`;
-	string $refs[] = `file -q -r`;
-	for ( $i = 0; $i < `size $refs`; $i++ ) {
-		if ( $refs[ $i ] == $ref ) {
-			ReferenceEditor;
-			global string $gReferenceEditorPanel;
-			sceneEditor -e -si $i $gReferenceEditorPanel;
-			return;
-		}
-	}
-}
-
-
-global proc renderFix(){
-$exists=0;
- for ($item in `getPanel -scriptType "renderWindowPanel"`) {
- 	if ( $item == "renderView" ) {
- 		print "renderView exists.\n";
- 		$exists=1;
- 	}
- }
- if ( $exists == 0 ) {
- 	for ($item in `getPanel -scriptType "renderWindowPanel"`) {
- 		//print ( $item + "\n");
- 		if ( $item == "renderWindowPanel1" ) {
- 		deleteUI renderWindowPanel1;
- 		$renderPanel = `scriptedPanel -type "renderWindowPanel" -unParent renderView`;
- 		scriptedPanel -e -label `interToUI $renderPanel` $renderPanel;
- 		}
- 	}
- }
-}
-
-
-global proc exportSelectedObj(){
-$sel = `ls -sl`;
-$currentFilePath = dirname(`file -q -sceneName`);
-$objfolder = $currentFilePath + "/obj_export";
-sysFile -makeDir $objfolder ;
-string $objpath = $objfolder + "/" + $sel[0] + ".obj";
-file -op "" -typ "OBJexport" -es $objpath;
-print("All saved");}
-
-global proc deleteHidden(){
-string $sel[] = `ls -sl`;
-string $all[] = `listRelatives -allDescendents -path $sel`;
-for ($node in $all){
-    if( `objExists $node` ) {
-	    int $visible = `getAttr ( $node + ".visibility" )`;
-	    if ( $visible == 0 ){
-		    if( `objExists $node` ) {
-		    	print ("Delete : "+ $node + "\n" );
-		        delete $node;
-		    }
-	    }
-	}
- }
-}
-
-global proc loadMentalRay(){
-int $loaded = `pluginInfo -query -loaded "Mayatomr"`;
-if ( $loaded = 0 ){
-// Load MR
-	loadPlugin Mayatomr;
-// Set AutoLoad
-	pluginInfo -edit -autoload true Mayatomr;
-//sets Renderer to MentalRay
-	setAttr -type "string" defaultRenderGlobals.currentRenderer "mentalRay";
-	}
-else{
-	setAttr -type "string" defaultRenderGlobals.currentRenderer "mentalRay";
-	print("Mental Ray is already loaded \n");
-	}
-}
-
-global proc toggleXray(){
-$currentPanel = `getPanel -withFocus`;
-
-if ( (`getPanel -typeOf $currentPanel`) == "modelPanel" )
-	modelEditor -e -xray ( !`modelEditor -q -xray $currentPanel` ) $currentPanel;
-}
-
-global proc mergeGrp(){
-
-$obj =`ls -sl -tr`;
-
-if ( !`size $obj` ) {
-		print "// Nothing is selected. //\n";
-		return;
-	}
-$name = $obj[0];
-polyUnite -ch 0 -mergeUVSets 1 -n $name;
-xform -cp;
 }

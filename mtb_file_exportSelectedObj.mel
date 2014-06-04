@@ -1,0 +1,9 @@
+global proc exportSelectedObj(){
+	$sel = `ls -sl`;
+	$currentFilePath = dirname(`file -q -sceneName`);
+	$objfolder = $currentFilePath + "/obj_export";
+	sysFile -makeDir $objfolder ;
+	string $objpath = $objfolder + "/" + $sel[0] + ".obj";
+	file -op "" -typ "OBJexport" -es $objpath;
+	print("All saved");
+	}

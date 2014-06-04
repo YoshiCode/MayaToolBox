@@ -1,0 +1,15 @@
+// Load all References
+global proc loadAllRef()
+{
+  string $references[] = `file -q -r`;
+  string $query;
+  for ($r in $references){
+      print($r + "\n");
+      $query = `referenceQuery -isLoaded $r`;
+      if ($query == 0){
+        $q = `referenceQuery -rfn $r`;
+      file -loadReference $q;
+    }
+  }
+  print("All references loaded");
+}

@@ -1,0 +1,13 @@
+// ungroup all Files under selected object
+// Still buggy because of leaf-level-transforms.
+global proc mtb_clean_ungroupAll(){
+	string $sel[] = `ls -sl`;
+	string $all[] = `listRelatives -allDescendents -path -type "transform" $sel`;
+	for ($node in $all){
+    	if( `objExists $node` ) {
+    	    DeleteHistory;
+      		ungroup;
+            print($node + "is now ungrouped \n");
+        	}
+      	}
+}

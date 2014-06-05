@@ -7,37 +7,37 @@ window -width 200 -t "Random Duplicator" randomDuplicate;
  
 columnLayout;
 intSliderGrp -label "Copies" -field true
-    -maxValue 10
-    -fieldMaxValue 100
+    -maxValue 10000
+    -fieldMaxValue 1000
     -value 20 randomCopies;
 
 text -l "Random Start / End";
 intSliderGrp -label "X-Start" -field true
-    -minValue -10 -maxValue 10
+    -minValue -1000 -maxValue 1000
     -fieldMinValue -100 -fieldMaxValue 100
     -value -5 xStartPositionSlider;
 intSliderGrp -label "X-End" -field true
-    -minValue -10 -maxValue 10
+    -minValue -1000 -maxValue 1000
     -fieldMinValue -100 -fieldMaxValue 100
     -value 5 xEndPositionSlider;
     
     
 checkBox -align "center" -label "Do Not Move Y" doNotMoveY;
 intSliderGrp -label "Y-Start" -field true
-    -minValue -10 -maxValue 10
+    -minValue -100 -maxValue 100
     -fieldMinValue -100 -fieldMaxValue 100
     -value -5 yStartPositionSlider;
 intSliderGrp -label "Y-End" -field true
-    -minValue -10 -maxValue 10
+    -minValue -100 -maxValue 100
     -fieldMinValue -100 -fieldMaxValue 100
     -value 5 yEndPositionSlider;
 
 intSliderGrp -label "Z-Start" -field true
-    -minValue -10 -maxValue 10
+    -minValue -100 -maxValue 100
     -fieldMinValue -100 -fieldMaxValue 100
     -value -5 zStartPositionSlider;
 intSliderGrp -label "Z-End" -field true
-    -minValue -10 -maxValue 10
+    -minValue -100 -maxValue 100
     -fieldMinValue -100 -fieldMaxValue 100
     -value 5 zEndPositionSlider;
 
@@ -78,9 +78,9 @@ int $doNotMoveY             = `checkBox -query -value doNotMoveY`;
             $y = rand($yStartPositionSlider,$yEndPositionSlider);
             $z = rand($zStartPositionSlider,$zEndPositionSlider);
             if ($doNotMoveY == 1){
-            move $x $yValueOfObj $z;}
+                move $x $yValueOfObj $z;}
             else {
-            move $x $y $z;
+                move $x $y $z;
             }
             select -d;
         };

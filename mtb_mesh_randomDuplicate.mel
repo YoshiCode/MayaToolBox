@@ -1,4 +1,4 @@
-global proc mtb_mesh_randumDuplicate(){
+global proc mtb_mesh_randomDuplicate(){
 
 if ( `window -exists randomDuplicate` ) {
  deleteUI randomDuplicate;

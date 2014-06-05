@@ -1,0 +1,25 @@
+// Duplicate Objects Randomly within Ranges
+// ToDo : Sliders & Int Fields !
+global proc mtb_mesh_randomDuplicate(){
+$c = 200;
+	$obj = `ls -sl`;
+    if ( !`size $obj` ) {
+    	print "// Nothing is selected. //\n";
+    	return;
+  	}
+    string $name = $obj[0];
+    while(`match "[0-9]" $name` != ""){
+        $name = `substitute "[0-9]" $name ""`;
+    }
+    print($name);
+    select $obj;
+    duplicate -rr; for ($i=1; $i<$c; ++$i) duplicate -rr -st;
+    for($i=1;$i<=$c;$i++){
+            select ($name+$i);
+            $x = rand(-5,5);
+            $y = rand(0,0);
+            $z = rand(-5,5);
+            move $x $y $z;
+            select -d;
+        };
+};

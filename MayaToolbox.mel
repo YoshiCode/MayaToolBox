@@ -66,6 +66,7 @@ formLayout -edit
   string $meshTab = `rowColumnLayout -numberOfColumns 2`;
   button -width 220 -label "Merge Group into Poly" -command "mtb_mesh_mergeGrp";
   button -width 220 -label "Split Mesh along Edge" -command "mtb_mesh_splitAlongEdge";
+  button -width 220 -label "Random Duplicates" -command "mtb_mesh_randomDuplicate";
   setParent..;
 
 

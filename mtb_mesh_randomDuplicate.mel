@@ -1,7 +1,41 @@
-// Duplicate Objects Randomly within Ranges
-// ToDo : Sliders & Int Fields !
-global proc mtb_mesh_randomDuplicate(){
-$c = 200;
+global proc mtb_mesh_randumDuplicate(){
+
+if ( `window -exists randomDuplicate` ) {
+ deleteUI randomDuplicate;
+}
+window -width 200 -t "Random Duplicator" randomDuplicate;
+ 
+columnLayout;
+intSliderGrp -label "Copies" -field true
+    -maxValue 10
+    -fieldMaxValue 100
+    -value 0 randomCopies;
+
+text -l "Random Seed between :";
+intSliderGrp -label "X-Pos" -field true
+    -minValue -10 -maxValue 10
+    -fieldMinValue -100 -fieldMaxValue 100
+    -value 0;
+intSliderGrp -label "Y-Pos" -field true
+    -minValue -10 -maxValue 10
+    -fieldMinValue -100 -fieldMaxValue 100
+    -value 0;
+intSliderGrp -label "Z-Pos" -field true
+    -minValue -10 -maxValue 10
+    -fieldMinValue -100 -fieldMaxValue 100
+    -value 0;
+intFieldGrp -l "intField";
+
+button -c randomDuplicate -label "Randomize!";
+
+showWindow randomDuplicate;
+}
+
+global proc randomDuplicate(){
+
+// Query Values from Input Window
+int $randomCopies  = `intSliderGrp -query -value randomCopies`;
+// Command
 	$obj = `ls -sl`;
     if ( !`size $obj` ) {
     	print "// Nothing is selected. //\n";
@@ -13,8 +47,8 @@ $c = 200;
     }
     print($name);
     select $obj;
-    duplicate -rr; for ($i=1; $i<$c; ++$i) duplicate -rr -st;
-    for($i=1;$i<=$c;$i++){
+    duplicate -rr; for ($i=1; $i<$randomCopies; ++$i) duplicate -rr -st;
+    for($i=1;$i<=$randomCopies;$i++){
             select ($name+$i);
             $x = rand(-5,5);
             $y = rand(0,0);

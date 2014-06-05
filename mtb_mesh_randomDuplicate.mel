@@ -12,31 +12,31 @@ intSliderGrp -label "Copies" -field true
     -value 20 randomCopies;
 
 text -l "Random Start / End";
-intSliderGrp -label "X-Start" -field true
+floatSliderGrp -label "X-Start" -field true
     -minValue -1000 -maxValue 1000
     -fieldMinValue -100 -fieldMaxValue 100
     -value -5 xStartPositionSlider;
-intSliderGrp -label "X-End" -field true
+floatSliderGrp -label "X-End" -field true
     -minValue -1000 -maxValue 1000
     -fieldMinValue -100 -fieldMaxValue 100
     -value 5 xEndPositionSlider;
     
     
 checkBox -align "center" -label "Do Not Move Y" doNotMoveY;
-intSliderGrp -label "Y-Start" -field true
+floatSliderGrp -label "Y-Start" -field true
     -minValue -100 -maxValue 100
     -fieldMinValue -100 -fieldMaxValue 100
     -value -5 yStartPositionSlider;
-intSliderGrp -label "Y-End" -field true
+floatSliderGrp -label "Y-End" -field true
     -minValue -100 -maxValue 100
     -fieldMinValue -100 -fieldMaxValue 100
     -value 5 yEndPositionSlider;
 
-intSliderGrp -label "Z-Start" -field true
+floatSliderGrp -label "Z-Start" -field true
     -minValue -100 -maxValue 100
     -fieldMinValue -100 -fieldMaxValue 100
     -value -5 zStartPositionSlider;
-intSliderGrp -label "Z-End" -field true
+floatSliderGrp -label "Z-End" -field true
     -minValue -100 -maxValue 100
     -fieldMinValue -100 -fieldMaxValue 100
     -value 5 zEndPositionSlider;
@@ -49,14 +49,14 @@ showWindow randomDuplicate;
 global proc randomDuplicate(){
 
 // Query Values from Input Window
-int $randomCopies           = `intSliderGrp -query -value randomCopies`;
-int $xStartPositionSlider   = `intSliderGrp -query -value xStartPositionSlider`;
-int $xEndPositionSlider     = `intSliderGrp -query -value xEndPositionSlider`;
-int $yStartPositionSlider   = `intSliderGrp -query -value yStartPositionSlider`;
-int $yEndPositionSlider     = `intSliderGrp -query -value yEndPositionSlider`;
-int $zStartPositionSlider   = `intSliderGrp -query -value zStartPositionSlider`;
-int $zEndPositionSlider     = `intSliderGrp -query -value zEndPositionSlider`;
-int $doNotMoveY             = `checkBox -query -value doNotMoveY`;
+int $randomCopies             = `intSliderGrp -query -value randomCopies`;
+float $xStartPositionSlider   = `floatSliderGrp -query -value xStartPositionSlider`;
+float $xEndPositionSlider     = `floatSliderGrp -query -value xEndPositionSlider`;
+float $yStartPositionSlider   = `floatSliderGrp -query -value yStartPositionSlider`;
+float $yEndPositionSlider     = `floatSliderGrp -query -value yEndPositionSlider`;
+float $zStartPositionSlider   = `floatSliderGrp -query -value zStartPositionSlider`;
+float $zEndPositionSlider     = `floatSliderGrp -query -value zEndPositionSlider`;
+float $doNotMoveY             = `checkBox -query -value doNotMoveY`;
 
 // Command
 	$obj = `ls -sl`;

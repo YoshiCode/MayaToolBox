@@ -1,9 +1,12 @@
 global proc mtb_file_exportSelectedObj(){
-	$sel = `ls -sl`;
+	string $sel[] = `ls -sl`;
 	$currentFilePath = dirname(`file -q -sceneName`);
 	$objfolder = $currentFilePath + "/obj_export";
 	sysFile -makeDir $objfolder ;
-	string $objpath = $objfolder + "/" + $sel[0] + ".obj";
-	file -op "" -typ "OBJexport" -es $objpath;
-	print("All saved");
+	int $i;
+	for ($i=0; $i < size($sel); $i++ ){
+		string $objpath = $objfolder + "/" + $sel[$i] + ".obj";
+		file -op "" -typ "OBJexport" -es $objpath;
+		print("All saved \n");
 	}
+}

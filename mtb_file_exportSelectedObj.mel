@@ -3,10 +3,10 @@ global proc mtb_file_exportSelectedObj(){
 	$currentFilePath = dirname(`file -q -sceneName`);
 	$objfolder = $currentFilePath + "/obj_export";
 	sysFile -makeDir $objfolder ;
-	int $i;
-	for ($i=0; $i < size($sel); $i++ ){
-		string $objpath = $objfolder + "/" + $sel[$i] + ".obj";
+	for($i in $sel){
+		select $i;
+		string $objpath = $objfolder + "/" + $i + ".obj";
 		file -op "" -typ "OBJexport" -es $objpath;
-		print("All saved \n");
+		print("Exported: $i \n");
 	}
 }
